@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # coding: utf-8
 
 '''
@@ -5,7 +6,6 @@ Make MongoDB mongoimport compatible JSON
 
 { "_id" : { "$oid" : "4e5bb37258200ed9aabc5d65" }, 
   "name" : "Bob", "age" : 28, "address" : "123 fake street" }
-
 
 Open Library dumps: a tab separated file with the following columns:
 
@@ -16,27 +16,27 @@ last_modified - last modified timestamp
 JSON - the complete record in JSON format
 '''
 
-IN_FILENAMES = [ 'ol_dump_editions_20120404.txt',
-                #'ol_dump_authors_20120404.txt',
-                #'ol_dump_works_20120404.txt',
-               ]
-
+import sys
 import json
-from pprint import pprint
+import gzip
 
-selected = 0
-
-for in_filename in IN_FILENAMES:
-	print '*' * 60 + ' ' + in_filename
-	out_filename = in_filename.replace('_dump', '')
-	out_filename = out_filename.replace('.txt', '.mongoimport')
-	with open(in_filename) as in_file, open(out_filename, 'wt') as out_file:
-		for count, line in enumerate(in_file, 1):
-			rec_type, key, rev, modified, body = line.split('\t')
-			rec = json.loads(body)
-			rec['_id'] = key
-			del rec['key']
-			out_file.write(json.dumps(rec, ensure_ascii=True)+'\n')
-			if count % 1000 == 0:
-				print count
-	print count, 'records written to', out_filename
+in_filename = sys.argv[1]
+print '*' * 60 + ' ' + in_filename
+if in_filename.endswith('.txt.gz'):
+    in_opener = gzip.open
+    in_extension = '.txt.gz'
+else:
+    in_opener = open
+    in_extension = '.txt'
+out_filename = in_filename.replace('_dump', '')
+out_filename = out_filename.replace(in_extension, '.mongoimport')
+with in_opener(in_filename) as in_file, open(out_filename, 'wt') as out_file:
+    for count, line in enumerate(in_file, 1):
+        rec_type, key, rev, modified, body = line.split('\t')
+        rec = json.loads(body)
+        rec['_id'] = key
+        del rec['key']
+        out_file.write(json.dumps(rec, ensure_ascii=True)+'\n')
+        if count % 1000 == 0:
+            print count
+print count, 'records written to', out_filename
