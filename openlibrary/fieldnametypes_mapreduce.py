@@ -30,8 +30,14 @@ def count_fields(collection):
     
 def report(results):
     docs = [(d['_id'], int(d['value']), ) for d in results]
-    for line in sorted(docs):
-        print '{1:6} {0}'.format(*line)
+    prev_name = None
+    for field_tag, count in sorted(docs):
+        field_name, type = field_tag.split(':')
+        if field_name == prev_name:
+            field_name = '_'*len(prev_name)
+        else:
+            prev_name = field_name
+        print '{0:6} {1} : {2}'.format(count, field_name, type)
 
 for col in 'authors works editions'.split():
     print '-' * 40, col
