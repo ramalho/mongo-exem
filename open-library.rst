@@ -60,7 +60,7 @@ Executar script ``make_import.py`` para gerar arquivos de importação para o Mo
   $ ./make_import.py data/ol_dump_works_20120404_BR.txt.gz
   $ ./make_import.py data/ol_dump_editions_20120404_BR.txt.gz
 
-Executar script ``import.sh``::
+Executar script ``import.sh``:
 
 .. literalinclude:: openlibrary/import.sh
   
@@ -83,12 +83,41 @@ Entrar no console do MongoDB para verificar o que foi feito::
 Verificar contagem de registros via Python
 --------------------------------------------
 
-Primeiro, um exemplo de como se conectar a um database específico:
+Primeiro, um exemplo de como se conectar a um database específico ``mongo_util.py``:
 
 .. literalinclude:: openlibrary/mongo_util.py
 
 
-Agora, a contagem:
+Agora, a contagem ``contar_registros.py``:
 
 .. literalinclude:: openlibrary/contar_registros.py
+
+----------------------
+Exemplo com MapReduce
+----------------------
+
+Operações de agregação mais complexas são feitas definindo pares de funções *map* e *reduce*, em JavaScript, para execução no MongoDB.
+
+Para fazer uma contagem dos campos que ocorrem no primeiro nível dos documentos de uma coleção, usamos a seguinte função *map*:
+
+.. code-block:: javascript
+
+    function () { 
+        for (field_name in this) 
+            emit(field_name, 1);
+    }
+
+E a seguinte função *reduce*:
+
+.. code-block:: javascript
+
+    function (key, values) { 
+        var total = 0;
+        values.forEach(function(n) { total += n; });
+        return total;
+    }
+
+Eis o código Python que usa dessas funções para gerar um relatório com a contagem de campos:
+
+.. literalinclude:: openlibrary/fields_mapreduce.py
 
