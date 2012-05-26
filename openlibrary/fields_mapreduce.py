@@ -6,7 +6,7 @@ from bson.code import Code
 db = conectar('openlibrary')
 
 MAP = Code('''function () {
-    for (field_name in this) emit(field_name, 1)
+    for (field_name in this) emit(field_name, 1);
 }''')
 
 REDUCE = Code('''function (key, values) { 
@@ -23,6 +23,10 @@ def report(results):
     for line in sorted(docs, key=lambda i: (-i[0], i[1])):
         print '{0:6} {1}'.format(*line)
 
+report(count_fields('author'))
+
+'''
 for col in 'authors works editions'.split():
     print '-' * 40, col
     report(count_fields(col))
+'''

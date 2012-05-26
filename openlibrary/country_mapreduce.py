@@ -6,6 +6,8 @@ from pprint import pprint
 
 db = conectar('openlibrary')
 
+# o que eu ganho usando Code(), se o Js como string funciona?
+
 MAP = Code('''function () {
     var pais = this.publish_country || "";
     pais = pais.replace(/^\s+|\s+$/g,"").toLowerCase();
