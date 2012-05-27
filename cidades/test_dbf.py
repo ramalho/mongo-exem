@@ -7,15 +7,19 @@ localidades = dbfreader(arq_dbf)
 
 nomes = []
 tipos = []
-try:
-    for i, loc in enumerate(localidades):
-        if i == 0:
-            nomes = loc
-        elif i == 1:
-            tipos = loc
-        else:
-            print '.',
-except ValueError:
-    print i
-    raise
-    
+
+localidades = list(localidades)
+
+print 'Primeira localidade:'
+
+for i, loc in enumerate(localidades):
+    if i == 0:
+        nomes = loc
+    elif i == 1:
+        tipos = loc
+    else:
+        pprint(zip(nomes, loc))
+        break
+
+print
+print 'Total:', len(localidades)-2, 'localidades'
