@@ -1,0 +1,22 @@
+Seq,Nome Campo Feature Geomedia e KML,Nome Campo Feature Shape,Tipo,Tamanho,Descrição
+1,ID,ID,Autonumber,-,Contagem automárica de geometrias ponto oriundas de setor
+2,CD_GEOCODIGO,CD_GEOCODI,Text,20,Geocódigo do setor (15 dígitos numéricos)
+3,TIPO,TIPO,Text,10,"Classificação de Tipo (Urbano ou Rural, 6 dígitos alfa-numéricos)"
+4,CD_GEOCODBA,CD_GEOCODB,Text,20,Geocódigo do bairro (12 dígitos numéricos)
+5,NM_BAIRRO,NM_BAIRRO,Text,60,Nome do bairro
+6,CD_GEOCODSD,CD_GEOCODS,Text,20,Geocódigo do subdistrito (11 dígitos numéricos)
+7,NM_SUBDISTRITO,NM_SUBDIST,Text,60,Nome do subdistrito
+8,CD_GEOCODDS,CD_GEOCODD,Text,20,Geocódigo do distrito (9 dígitos numéricos)
+9,NM_DISTRITO,NM_DISTRIT,Text,60,Nome do distrito
+10,CD_GEOCODMU,CD_GEOCODM,Text,20,Geocódigo do Município (7 dígitos numéricos)
+11,NM_MUNICIPIO,NM_MUNICIP,Text,60,Nome do Município
+12,NM_MICRO,NM_MICRO,Text,100,Nome Micro-região
+13,NM_MESO,NM_MESO,Text,100,Nome Meso-região
+14,NM_UF,NM_UF,Text,60,Nome da UF
+15,CD_NIVEL,CD_NIVEL,Text,1,Código do Nível da Localidade
+16,CD_CATEGORIA,CD_CATEGOR,Text,5,Código da Categoria da Localidade
+17,NM_CATEGORIA,NM_CATEGOR,Text,50,Nome da Categoria da Localidade
+18,NM_LOCALIDADE,NM_LOCALID,Text,60,Nome da Localidade
+19,LONG,LONG,Double,6 dec.,Longitude da Localidade em grau decimal
+20,LAT,LAT,Double,6 dec.,Latitude da Localidade em grau decimal
+21,ALT,ALT,Double,2 dec.,"Altitude da Localidade, oriunda de SRTM em metros"
