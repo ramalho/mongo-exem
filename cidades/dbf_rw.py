@@ -59,7 +59,10 @@ def dbfreader(f):
             elif typ == 'L':
                 value = (value in 'YyTt' and 'T') or (value in 'NnFf' and 'F') or '?'
             elif typ == 'F':
-                value = float(value)
+                try:
+                    value = float(value)
+                except ValueError:
+                    value = None
             result.append(value)
         yield result
 
