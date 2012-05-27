@@ -23,3 +23,4 @@ for i, loc in enumerate(localidades):
 
 print
 print 'Total:', len(localidades)-2, 'localidades'
+print 'Tipos dos campos:', [t[0] for t in tipos]

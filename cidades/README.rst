@@ -1,7 +1,7 @@
 
-=============================
-Códigos de Municípios do IBGE
-=============================
+========================
+Códigos de Áreas do IBGE
+========================
 
 Conforme a página oficial do IBGE_:
 
@@ -11,7 +11,7 @@ Conforme a página oficial do IBGE_:
 
 .. _IBGE: http://www.ibge.gov.br/concla/cod_area/cod_area.php
 
-Na verdade, os dados encontrados em formato .DBF contém mais do que os
+Na prática, os dados encontrados em formato .DBF contém mais do que os
 municípios, mas também distritos, subdistritos, bairros e setores, em
 uma hierarquia de códigos de 7 a 15 dígitos, respectivamente.
 
@@ -19,12 +19,11 @@ Fonte dos dados:
 
 ftp://geoftp.ibge.gov.br/organizacao_territorial/localidades/Shapefile_SHP/BR_Localidades_2010_v1.dbf
 
-
-
 Descrição dos Campos
 ====================
 
-Descrição dos Campos Finais para Features Geomedia, Shape e KML de Pontos de Localidades 2010 em 28/11/2011
+Descrição dos Campos Finais para Features Geomedia, Shape e KML de Pontos de
+Localidades 2010 em 28/11/2011. 
 
 Tabela convertida da Planilha .XLS encontrada em: 
 ftp://geoftp.ibge.gov.br/organizacao_territorial/localidades/descritivo_campos_localidades_2010.xls
@@ -54,3 +53,32 @@ ftp://geoftp.ibge.gov.br/organizacao_territorial/localidades/descritivo_campos_l
 20 LAT            LAT        Double     6 dec. Latitude da Localidade em grau decimal                               
 21 ALT            ALT        Double     2 dec. Altitude da Localidade, oriunda de SRTM em metros                    
 == ============== ========== ========== ====== =================================================================
+
+
+=====================
+Testes com o Mongo DB
+=====================
+
+
+Carga para o MongoDB
+====================
+
+Conversão de .DBF para JSON pronto para importar::
+
+	$ python dbf2mongo.py > localidades.mongoimport
+
+Contagem do número de linhas::
+
+  $ wc -l localidades.mongoimport 
+     21886 localidades.mongoimport
+
+Importação::
+
+  $ mongoimport -d ibge -c localidades localidades.mongoimport
+
+
+
+
+
+
+
